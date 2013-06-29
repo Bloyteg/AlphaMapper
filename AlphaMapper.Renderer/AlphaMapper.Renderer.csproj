@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{78A4979D-A8D7-4ED6-BB87-4F77D6442F5C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AlphaMapper.Renderer</RootNamespace>
+    <AssemblyName>AlphaMapper.Renderer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SlimDX, Version=4.0.13.43, Culture=neutral, PublicKeyToken=b1b0c32fd1ffe4f9, processorArchitecture=AMD64" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Components\Camera.cs" />
+    <Compile Include="Components\Light.cs" />
+    <Compile Include="Components\MaterialOverload.cs" />
+    <Compile Include="Components\MeshBatchInstanceTransform.cs" />
+    <Compile Include="Components\SkewType.cs" />
+    <Compile Include="Components\VectorPair.cs" />
+    <Compile Include="Drawables\MeshDrawableBase.cs" />
+    <Compile Include="InternalComponents\DeferredVertex.cs" />
+    <Compile Include="InternalComponents\DepthStencilViewResource.cs" />
+    <Compile Include="InternalComponents\FaceGroup.cs" />
+    <Compile Include="InternalComponents\HelperExtensions.cs" />
+    <Compile Include="InternalComponents\IndexBuffer.cs" />
+    <Compile Include="InternalComponents\IRenderTransformable.cs" />
+    <Compile Include="InternalComponents\Light.cs" />
+    <Compile Include="InternalComponents\MeshCache.cs" />
+    <Compile Include="InternalComponents\MeshCacheReference.cs" />
+    <Compile Include="InternalComponents\RenderTargetResource.cs" />
+    <Compile Include="InternalComponents\RenderTransformableExtensions.cs" />
+    <Compile Include="InternalComponents\Tag.cs" />
+    <Compile Include="InternalComponents\TagGroup.cs" />
+    <Compile Include="Drawables\MeshBatchDrawable.cs" />
+    <Compile Include="InternalComponents\TagGroupMaterialOverload.cs" />
+    <Compile Include="Managers\ResourceManager.cs" />
+    <Compile Include="Managers\ResourceManager.Model.cs" />
+    <Compile Include="RenderSystem.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Drawables\Drawable.cs" />
+    <Compile Include="Managers\DrawingManager.cs" />
+    <Compile Include="Drawables\MeshDrawable.cs" />
+    <Compile Include="InternalComponents\PrelitVertex.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Managers\DeviceManager.cs" />
+    <Compile Include="InternalComponents\StandardVertex.cs" />
+    <Compile Include="InternalComponents\VertexLayouts.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Byte.IntermediateModel\Byte.IntermediateModel.csproj">
+      <Project>{D0DE7E74-B546-4BD1-A4AC-F4DC4EB959AD}</Project>
+      <Name>Byte.IntermediateModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Byte.Math\Byte.Math.csproj">
+      <Project>{B78D3E27-94A6-4D51-9C82-75A3E68EA4BA}</Project>
+      <Name>Byte.Math</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Byte.Utility\Byte.Utility.csproj">
+      <Project>{F6AB8244-41FA-4A22-8F33-5C5230F0CA39}</Project>
+      <Name>Byte.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Effects\effect.fx" />
+    <None Include="Effects\effect.fxo" />
+    <None Include="Effects\effect_globals.fx" />
+    <None Include="Effects\effect_shadow.fx" />
+    <None Include="Effects\effect_shadow.fxo" />
+    <None Include="Effects\effect_shaders.fx" />
+    <None Include="Effects\effect_light.fx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Utilities\bin\x86\fxc.exe" /Zi /T fx_5_0 /Fo "$(ProjectDir)\Effects\effect.fxo" "$(ProjectDir)\Effects\effect.fx"
+"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Utilities\bin\x86\fxc.exe" /Zi /T fx_5_0 /Fo "$(ProjectDir)\Effects\effect_shadow.fxo" "$(ProjectDir)\Effects\effect_shadow.fx"</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

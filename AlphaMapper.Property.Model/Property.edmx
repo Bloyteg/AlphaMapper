@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AlphaMapper.Property.Model.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="AlphaMapperPropertyModelStoreContainer">
+          <EntitySet Name="models" EntityType="AlphaMapper.Property.Model.Store.models" store:Type="Tables" Schema="alphamapper" />
+        </EntityContainer>
+        <EntityType Name="models">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BuildDate" Type="datetime" />
+          <Property Name="ModelName" Type="varchar" MaxLength="64" />
+          <Property Name="Owner" Type="int" />
+          <Property Name="PositionY" Type="int" />
+          <Property Name="CellX" Type="int" Nullable="false" />
+          <Property Name="OffsetX" Type="int" />
+          <Property Name="CellZ" Type="int" Nullable="false" />
+          <Property Name="OffsetZ" Type="int" />
+          <Property Name="Yaw" Type="int" />
+          <Property Name="Tilt" Type="int" />
+          <Property Name="Roll" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="256" />
+          <Property Name="Action" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <Function Name="query_region" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="alphamapper">
+          <Parameter Name="west" Type="int" Mode="In" />
+          <Parameter Name="north" Type="int" Mode="In" />
+          <Parameter Name="east" Type="int" Mode="In" />
+          <Parameter Name="south" Type="int" Mode="In" />
+        </Function>
+        <!--Errors Found During Generation:
+      warning 6013: The table/view 'def.alphamapper.temp_result' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+      
+      <EntityType Name="temp_result">
+        <Property Name="BuildDate" Type="datetime" />
+        <Property Name="ModelName" Type="varchar" MaxLength="64" />
+        <Property Name="Owner" Type="int" />
+        <Property Name="PositionY" Type="int" />
+        <Property Name="CellX" Type="int" />
+        <Property Name="OffsetX" Type="int" />
+        <Property Name="CellZ" Type="int" />
+        <Property Name="OffsetZ" Type="int" />
+        <Property Name="Yaw" Type="int" />
+        <Property Name="Tilt" Type="int" />
+        <Property Name="Roll" Type="int" />
+        <Property Name="Description" Type="varchar" MaxLength="256" />
+        <Property Name="Action" Type="varchar" MaxLength="256" />
+      </EntityType>-->
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AlphaMapper.Property.Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="PropertyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="V3Object" EntityType="AlphaMapper.Property.Model.V3Object" />
+          <FunctionImport Name="QueryRegion" EntitySet="V3Object" ReturnType="Collection(AlphaMapper.Property.Model.V3Object)">
+            <Parameter Name="west" Mode="In" Type="Int32" />
+            <Parameter Name="north" Mode="In" Type="Int32" />
+            <Parameter Name="east" Mode="In" Type="Int32" />
+            <Parameter Name="south" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="V3Object">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="BuildDate" />
+          <Property Type="String" Name="ModelName" />
+          <Property Type="Int32" Name="Owner" />
+          <Property Type="Int32" Name="PositionY" />
+          <Property Type="Int32" Name="CellX" Nullable="false" />
+          <Property Type="Int32" Name="OffsetX" />
+          <Property Type="Int32" Name="CellZ" Nullable="false" />
+          <Property Type="Int32" Name="OffsetZ" />
+          <Property Type="Int32" Name="Yaw" />
+          <Property Type="Int32" Name="Tilt" />
+          <Property Type="Int32" Name="Roll" />
+          <Property Type="String" Name="Description" />
+          <Property Type="String" Name="Action" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AlphaMapperPropertyModelStoreContainer" CdmEntityContainer="PropertyEntities">
+          <EntitySetMapping Name="V3Object">
+            <EntityTypeMapping TypeName="AlphaMapper.Property.Model.V3Object">
+              <MappingFragment StoreEntitySet="models">
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Roll" ColumnName="Roll" />
+                <ScalarProperty Name="Tilt" ColumnName="Tilt" />
+                <ScalarProperty Name="Yaw" ColumnName="Yaw" />
+                <ScalarProperty Name="OffsetZ" ColumnName="OffsetZ" />
+                <ScalarProperty Name="CellZ" ColumnName="CellZ" />
+                <ScalarProperty Name="OffsetX" ColumnName="OffsetX" />
+                <ScalarProperty Name="CellX" ColumnName="CellX" />
+                <ScalarProperty Name="PositionY" ColumnName="PositionY" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="BuildDate" ColumnName="BuildDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="QueryRegion" FunctionName="AlphaMapper.Property.Model.Store.query_region">
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Property">
+        <EntityTypeShape EntityType="AlphaMapper.Property.Model.V3Object" Width="1.5" PointX="0.75" PointY="0.75" Height="3.7109993489583326" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

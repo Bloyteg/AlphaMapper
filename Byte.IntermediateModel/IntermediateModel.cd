@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Byte.IntermediateModel.Mesh.Clump">
+    <Position X="1.75" Y="3.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="PrototypeInstances" Type="Byte.IntermediateModel.Mesh.PrototypeInstance">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-1.733" Y="0.103" Height="0.182" Width="1.641" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEgAAAAAAABAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mesh\Clump.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="PrototypeInstances" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Orientation="Left" Position="0.1" />
+  </Class>
+  <Class Name="Byte.IntermediateModel.Mesh.MeshGeometry" Collapsed="true">
+    <Position X="4.5" Y="1.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Children" Type="Byte.IntermediateModel.Mesh.Clump" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.5" Y="1.531" />
+        <Point X="0.641" Y="1.531" />
+        <Point X="0.641" Y="5.125" />
+        <Point X="1.75" Y="5.125" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Primitives" Type="Byte.IntermediateModel.Primitive.PrimitiveGeometry" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.688" Y="1.812" />
+        <Point X="5.688" Y="2.73" />
+        <Point X="8.5" Y="2.73" />
+        <Point X="8.5" Y="9.687" />
+        <Point X="9" Y="9.687" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.162" Y="-0.294" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Vertices" Type="Byte.IntermediateModel.Components.Vertex" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6" Y="1.662" />
+        <Point X="9.688" Y="1.662" />
+        <Point X="9.688" Y="2.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAQAIAAAAAABAAAAAAEAAAAAAQAAAAAEAgAAEAQgAA=</HashCode>
+      <FileName>Mesh\MeshGeometry.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Children" />
+      <Property Name="Primitives" />
+      <Property Name="Vertices" />
+      <Property Name="Faces" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Byte.IntermediateModel.Mesh.Prototype">
+    <Position X="6.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mesh\Prototype.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Byte.IntermediateModel.Mesh.PrototypeInstance" BaseTypeListCollapsed="true">
+    <Position X="1.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mesh\Prototype.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.134" />
+  </Class>
+  <Class Name="Byte.IntermediateModel.Components.Material" BaseTypeListCollapsed="true">
+    <Position X="18" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IEIAEAwAAAIAACAAggCgBBKACgAAAIgCAAKAkEAAQqA=</HashCode>
+      <FileName>Components\Material.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Color" />
+      <Property Name="TextureMode" />
+      <Property Name="TextureAddressMode" />
+      <Property Name="LightSampling" />
+      <Property Name="GeometrySampling" />
+      <Property Name="MaterialMode" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Byte.IntermediateModel.Components.Triangle">
+    <Position X="13.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Triangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Byte.IntermediateModel.Components.UV">
+    <Position X="9" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAAA=</HashCode>
+      <FileName>Components\UV.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Byte.IntermediateModel.Components.Vertex">
+    <Position X="9" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAACAAAAAgAAAAAAAAAAAIAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Components\Vertex.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UV" />
+      <Property Name="Prelight" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Byte.IntermediateModel.Primitive.PrimitiveGeometry" BaseTypeListCollapsed="true">
+    <Position X="9" Y="8" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Vertices" Type="Byte.IntermediateModel.Components.Vertex" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.5" Y="8.812" />
+        <Point X="11.625" Y="8.812" />
+        <Point X="11.625" Y="4.125" />
+        <Point X="10.5" Y="4.125" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.203" Y="-0.349" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Material" Type="Byte.IntermediateModel.Components.Material">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.104" Y="0.099" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AEAAAIAAAAAAAAAAAAAAAAQAIAAAAAAAGAkAAAAAgAA=</HashCode>
+      <FileName>Primitive\PrimitiveGeometry.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Material" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Vertices" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Orientation="Right" Position="0.131" />
+  </Class>
+  <Class Name="Byte.IntermediateModel.Model" Collapsed="true">
+    <Position X="4.25" Y="4" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Prototypes" Type="Byte.IntermediateModel.Mesh.Prototype">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.037" Y="0.102" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="MainClump" Type="Byte.IntermediateModel.Mesh.Clump">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.027" Y="0.154" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgIAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Model.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MainClump" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Prototypes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Byte.IntermediateModel.Components.Face">
+    <Position X="11" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAEAgAAABAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Face.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Triangles" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Struct Name="Byte.IntermediateModel.Components.Color">
+    <Position X="14.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAAAAACAEAAyA=</HashCode>
+      <FileName>Components\Color.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Interface Name="Byte.IntermediateModel.IGeometry" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>IGeometry.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Byte.IntermediateModel.ITransformable" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ITransformable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Byte.IntermediateModel.Components.GeometrySampling" Collapsed="true">
+    <Position X="21.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAEAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Material.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Byte.IntermediateModel.Components.LightSampling" Collapsed="true">
+    <Position X="21.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Material.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Byte.IntermediateModel.Components.TextureMode" Collapsed="true">
+    <Position X="21.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAABAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Components\Material.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Byte.IntermediateModel.Components.TextureAddressMode" Collapsed="true">
+    <Position X="21.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAABAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\Material.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Byte.IntermediateModel.Components.MaterialMode" Collapsed="true">
+    <Position X="21.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Components\Material.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
