@@ -13,7 +13,7 @@
 // limitations under the License.
 // ========================================================================
 
-namespace Byte.ActionCommandTranslator
+namespace Byte.ActionCommand.Translator
 
 (* Define useful data structures *)
 type public Vector3 =

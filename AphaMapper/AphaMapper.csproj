@@ -39,14 +39,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlphaMapper.cs">
@@ -85,10 +79,6 @@
     <ProjectReference Include="..\AlphaMapper.Renderer\AlphaMapper.Renderer.csproj">
       <Project>{78A4979D-A8D7-4ED6-BB87-4F77D6442F5C}</Project>
       <Name>AlphaMapper.Renderer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Byte.IntermediateModel\Byte.IntermediateModel.csproj">
-      <Project>{D0DE7E74-B546-4BD1-A4AC-F4DC4EB959AD}</Project>
-      <Name>Byte.IntermediateModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

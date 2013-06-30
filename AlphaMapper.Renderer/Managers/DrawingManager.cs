@@ -16,13 +16,14 @@
 using System;
 using System.Runtime.InteropServices;
 using AlphaMapper.Renderer.InternalComponents;
-using SlimDX;
-using SlimDX.Direct3D11;
-using SlimDX.DXGI;
-using DXBuffer = SlimDX.Direct3D11.Buffer;
-using ShaderResourceView = SlimDX.Direct3D11.ShaderResourceView;
-using DXTextureAddressMode = SlimDX.Direct3D11.TextureAddressMode;
-using Device = SlimDX.Direct3D11.Device;
+using SharpDX;
+using SharpDX.Direct3D;
+using SharpDX.Direct3D11;
+using SharpDX.DXGI;
+using DXBuffer = SharpDX.Direct3D11.Buffer;
+using ShaderResourceView = SharpDX.Direct3D11.ShaderResourceView;
+using DXTextureAddressMode = SharpDX.Direct3D11.TextureAddressMode;
+using Device = SharpDX.Direct3D11.Device;
 using TextureAddressMode = Byte.IntermediateModel.Components.TextureAddressMode;
 
 namespace AlphaMapper.Renderer.Managers
@@ -73,8 +74,8 @@ namespace AlphaMapper.Renderer.Managers
         private readonly EffectScalarVariable _opacity;
         private readonly EffectScalarVariable _ambient;
         private readonly EffectScalarVariable _diffuse;
-        private readonly EffectResourceVariable _texture;
-        private readonly EffectResourceVariable _mask;
+        private readonly EffectShaderResourceVariable _texture;
+        private readonly EffectShaderResourceVariable _mask;
         private readonly EffectSamplerVariable _textureSampler;
         private readonly EffectScalarVariable _hasTexture;
         private readonly EffectScalarVariable _hasMask;
@@ -82,7 +83,7 @@ namespace AlphaMapper.Renderer.Managers
         private readonly EffectScalarVariable _isInstanced;
         private readonly EffectScalarVariable _isShadowInstanced;
         private readonly EffectScalarVariable _isColorTinted;
-        private readonly EffectResourceVariable _shadowMask;
+        private readonly EffectShaderResourceVariable _shadowMask;
         private readonly EffectScalarVariable _shadowHasMask;
 
         private EffectTechnique _currentTechnique;
@@ -113,8 +114,8 @@ namespace AlphaMapper.Renderer.Managers
             _opacity = effect.GetVariableByName("g_Opacity").AsScalar();
             _ambient = effect.GetVariableByName("g_Ambient").AsScalar();
             _diffuse = effect.GetVariableByName("g_Diffuse").AsScalar();
-            _texture = effect.GetVariableByName("g_Texture").AsResource();
-            _mask = effect.GetVariableByName("g_Mask").AsResource();
+            _texture = effect.GetVariableByName("g_Texture").AsShaderResource();
+            _mask = effect.GetVariableByName("g_Mask").AsShaderResource();
             _textureSampler = effect.GetVariableByName("g_TextureSampler").AsSampler();
             _hasTexture = effect.GetVariableByName("g_HasTexture").AsScalar();
             _hasMask = effect.GetVariableByName("g_HasMask").AsScalar();
@@ -138,7 +139,7 @@ namespace AlphaMapper.Renderer.Managers
             _isShadowInstanced = shadowEffect.GetVariableByName("g_IsInstanced").AsScalar();
             _shadowWorldMatrix = shadowEffect.GetVariableByName("g_WorldMatrix").AsMatrix();
             _shadowHasMask = shadowEffect.GetVariableByName("g_HasMask").AsScalar();
-            _shadowMask = shadowEffect.GetVariableByName("g_Mask").AsResource();
+            _shadowMask = shadowEffect.GetVariableByName("g_Mask").AsShaderResource();
             _shadowLightViewProjectionMatrix = shadowEffect.GetVariableByName("g_LightViewProjectionMatrix").AsMatrix();
 
         }
@@ -555,15 +556,15 @@ namespace AlphaMapper.Renderer.Managers
 
             _currentTextureAddressMode = textureAddressMode;
 
-            var samplerState = _textureSampler.GetSamplerState(0);
+            var samplerState = _textureSampler.GetSampler(0);
             var samplerStateDescription = samplerState.Description;
             var addressMode = GetAddressMode(textureAddressMode);
 
             samplerStateDescription.AddressU = addressMode;
             samplerStateDescription.AddressV = addressMode;
 
-            var newSamplerState = SamplerState.FromDescription(_device, samplerStateDescription);
-            _textureSampler.SetSamplerState(0, newSamplerState);
+            var newSamplerState = new SamplerState(_device, samplerStateDescription);
+            _textureSampler.SetSampler(0, newSamplerState);
 
             newSamplerState.Dispose();
             samplerState.Dispose();

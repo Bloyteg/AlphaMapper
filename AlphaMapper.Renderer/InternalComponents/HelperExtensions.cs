@@ -15,9 +15,10 @@
 
 using Byte.IntermediateModel.Components;
 using Byte.Math;
-using SlimDX;
-using Vector2 = SlimDX.Vector2;
-using Vector3 = SlimDX.Vector3;
+using SharpDX;
+using Color = Byte.IntermediateModel.Components.Color;
+using Vector2 = SharpDX.Vector2;
+using Vector3 = SharpDX.Vector3;
 
 namespace AlphaMapper.Renderer.InternalComponents
 {
@@ -83,7 +84,7 @@ namespace AlphaMapper.Renderer.InternalComponents
 
         public static Color4 ToDXColor4(this Color color)
         {
-            return new Color4(color.R, color.G, color.B);
+            return new Color4(color.ToDXColor3(), 1);
         }
 
         public static Color3 ToDXColor3(this Color color)

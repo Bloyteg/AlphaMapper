@@ -13,7 +13,7 @@
 // limitations under the License.
 // ========================================================================
 
-using SlimDX;
+using SharpDX;
 
 namespace AlphaMapper.Renderer.InternalComponents
 {

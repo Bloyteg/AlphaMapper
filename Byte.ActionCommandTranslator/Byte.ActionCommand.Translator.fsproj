@@ -10,7 +10,7 @@
     <RootNamespace>Byte.ActionCommandTranslator</RootNamespace>
     <AssemblyName>Byte.ActionCommandTranslator</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <Name>Byte.ActionCommandTranslator</Name>
+    <Name>Byte.ActionCommand.Translator</Name>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

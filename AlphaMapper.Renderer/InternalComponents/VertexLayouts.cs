@@ -14,7 +14,7 @@
 // ========================================================================
 
 using System;
-using SlimDX.Direct3D11;
+using SharpDX.Direct3D11;
 
 namespace AlphaMapper.Renderer.InternalComponents
 {

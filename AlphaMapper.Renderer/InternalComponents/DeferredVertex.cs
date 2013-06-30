@@ -14,7 +14,7 @@
 // ========================================================================
 
 using System.Runtime.InteropServices;
-using SlimDX;
+using SharpDX;
 
 namespace AlphaMapper.Renderer.InternalComponents
 {

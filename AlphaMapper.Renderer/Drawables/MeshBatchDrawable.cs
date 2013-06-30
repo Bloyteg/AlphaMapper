@@ -15,8 +15,8 @@
 
 using AlphaMapper.Renderer.InternalComponents;
 using Byte.IntermediateModel.Components;
-using DXBuffer = SlimDX.Direct3D11.Buffer;
-using Matrix = SlimDX.Matrix;
+using DXBuffer = SharpDX.Direct3D11.Buffer;
+using Matrix = SharpDX.Matrix;
 
 namespace AlphaMapper.Renderer.Drawables
 {

@@ -15,7 +15,7 @@
 
 using System;
 using Byte.IntermediateModel.Components;
-using SlimDX.Direct3D11;
+using SharpDX.Direct3D11;
 using Byte.Utility;
 
 namespace AlphaMapper.Renderer.InternalComponents

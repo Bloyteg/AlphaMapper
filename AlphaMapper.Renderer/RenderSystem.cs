@@ -21,11 +21,11 @@ using AlphaMapper.Renderer.Drawables;
 using AlphaMapper.Renderer.InternalComponents;
 using AlphaMapper.Renderer.Managers;
 using Byte.IntermediateModel;
-using SlimDX;
-using SlimDX.Direct3D11;
-using SlimDX.DXGI;
-using SlimDX.Windows;
-using Resource = SlimDX.Direct3D11.Resource;
+using SharpDX;
+using SharpDX.Direct3D11;
+using SharpDX.DXGI;
+using SharpDX.Windows;
+using Resource = SharpDX.Direct3D11.Resource;
 
 namespace AlphaMapper.Renderer
 {
@@ -133,7 +133,7 @@ namespace AlphaMapper.Renderer
 
         public void DrawContinuousFrames(Form mainWindow)
         {
-            MessagePump.Run(mainWindow, DrawSingleFrame);
+           // MessagePump.Run(mainWindow, DrawSingleFrame);
         }
 
         public void SaveFrameToFile(string fileName)

@@ -17,7 +17,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using AlphaMapper.Property.Model;
 
 namespace AlphaMapper.PropertyLoader
 {

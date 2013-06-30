@@ -14,7 +14,7 @@
 // ========================================================================
 
 using System;
-using SlimDX.Direct3D11;
+using SharpDX.Direct3D11;
 
 namespace AlphaMapper.Renderer.InternalComponents
 {
@@ -47,7 +47,7 @@ namespace AlphaMapper.Renderer.InternalComponents
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="AlphaMapper.Renderer.InternalComponents.RenderTargetResource"/> to <see cref="SlimDX.Direct3D11.Texture2D"/>.
+        /// Performs an implicit conversion from <see cref="AlphaMapper.Renderer.InternalComponents.RenderTargetResource"/> to <see cref="SharpDX.Direct3D11.Texture2D"/>.
         /// </summary>
         /// <param name="resource">The resource.</param>
         /// <returns>
@@ -59,7 +59,7 @@ namespace AlphaMapper.Renderer.InternalComponents
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="AlphaMapper.Renderer.InternalComponents.RenderTargetResource"/> to <see cref="SlimDX.Direct3D11.RenderTargetView"/>.
+        /// Performs an implicit conversion from <see cref="AlphaMapper.Renderer.InternalComponents.RenderTargetResource"/> to <see cref="SharpDX.Direct3D11.RenderTargetView"/>.
         /// </summary>
         /// <param name="resource">The resource.</param>
         /// <returns>
@@ -71,7 +71,7 @@ namespace AlphaMapper.Renderer.InternalComponents
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="AlphaMapper.Renderer.InternalComponents.RenderTargetResource"/> to <see cref="SlimDX.Direct3D11.ShaderResourceView"/>.
+        /// Performs an implicit conversion from <see cref="AlphaMapper.Renderer.InternalComponents.RenderTargetResource"/> to <see cref="SharpDX.Direct3D11.ShaderResourceView"/>.
         /// </summary>
         /// <param name="resource">The resource.</param>
         /// <returns>

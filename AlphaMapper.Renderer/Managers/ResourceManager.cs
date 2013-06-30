@@ -21,7 +21,7 @@ using AlphaMapper.Renderer.Components;
 using AlphaMapper.Renderer.Drawables;
 using AlphaMapper.Renderer.InternalComponents;
 using Byte.IntermediateModel;
-using SlimDX.Direct3D11;
+using SharpDX.Direct3D11;
 
 namespace AlphaMapper.Renderer.Managers
 {

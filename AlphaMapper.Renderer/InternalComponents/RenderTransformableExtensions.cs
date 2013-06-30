@@ -15,7 +15,7 @@
 
 using System;
 using AlphaMapper.Renderer.Components;
-using SlimDX;
+using SharpDX;
 
 namespace AlphaMapper.Renderer.InternalComponents
 {

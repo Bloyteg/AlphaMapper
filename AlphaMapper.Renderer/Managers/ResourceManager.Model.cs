@@ -24,9 +24,9 @@ using Byte.IntermediateModel.Components;
 using Byte.IntermediateModel.Mesh;
 using Byte.IntermediateModel.Primitive;
 using Byte.Utility;
-using SlimDX;
-using SlimDX.Direct3D11;
-using DXBuffer = SlimDX.Direct3D11.Buffer;
+using SharpDX;
+using SharpDX.Direct3D11;
+using DXBuffer = SharpDX.Direct3D11.Buffer;
 
 namespace AlphaMapper.Renderer.Managers
 {

@@ -13,10 +13,10 @@
 // limitations under the License.
 // ========================================================================
 
-namespace Byte.ActionCommandTranslator
+namespace Byte.ActionCommand.Translator
 open Byte.ActionCommand.Parser.Parser
 open Byte.ActionCommand.Parser.ActionCommandAST
-open Byte.ActionCommandTranslator
+open Byte.ActionCommand.Translator
 open Byte.FSharp.Helpers.Null
 open System.Globalization
 

@@ -34,18 +34,25 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SlimDX">
-      <HintPath>..\packages\SlimDX.4.0.13.43\lib\NET40\SlimDX.dll</HintPath>
+    <Reference Include="SharpDX">
+      <HintPath>..\packages\SharpDX.2.4.2\lib\net40\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.D3DCompiler">
+      <HintPath>..\packages\SharpDX.D3DCompiler.2.4.2\lib\net40\SharpDX.D3DCompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11">
+      <HintPath>..\packages\SharpDX.Direct3D11.2.4.2\lib\net40\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11.Effects">
+      <HintPath>..\packages\SharpDX.Direct3D11.Effects.2.4.2\lib\net40\SharpDX.Direct3D11.Effects.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>..\packages\SharpDX.DXGI.2.4.2\lib\net40\SharpDX.DXGI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\Camera.cs" />
@@ -115,6 +122,10 @@
     <None Include="Effects\effect_shaders.fx" />
     <None Include="Effects\effect_light.fx" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="sharpdx_direct3d11_effects_x64.dll" />
+    <Content Include="sharpdx_direct3d11_effects_x86.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
