@@ -77,74 +77,74 @@ namespace AlphaMapper.PropertyLoader
             get { return !_inStream.EndOfStream; }
         }
 
-        public IEnumerable<V3Object> Property
-        {
-            get
-            {
-                while(!_inStream.EndOfStream)
-                {
-                    var input = ReadLine(_inStream);
-                    if (input == null)
-                    {
-                        continue;
-                    }
+        //public IEnumerable<V3Object> Property
+        //{
+        //    get
+        //    {
+        //        while(!_inStream.EndOfStream)
+        //        {
+        //            var input = ReadLine(_inStream);
+        //            if (input == null)
+        //            {
+        //                continue;
+        //            }
 
-                    var components = input.Split(new[] { ' ' }, 14);
+        //            var components = input.Split(new[] { ' ' }, 14);
 
-                    if(components.Length < 14 || int.Parse(components[8]) != 0)
-                    {
-                        continue;
-                    }
+        //            if(components.Length < 14 || int.Parse(components[8]) != 0)
+        //            {
+        //                continue;
+        //            }
 
-                    var owner = int.Parse(components[0]);
-                    var buildDate = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(int.Parse(components[1]));
-                    var xOrigin = int.Parse(components[2]);
-                    var yOrigin = int.Parse(components[3]);
-                    var zOrigin = int.Parse(components[4]);
-                    var yaw = int.Parse(components[5]);
-                    var tilt = int.Parse(components[6]);
-                    var roll = int.Parse(components[7]);
-                    var modelLength = int.Parse(components[9]);
-                    var descriptionLength = int.Parse(components[10]);
-                    var actionLength = int.Parse(components[11]);
-                    var payload = Encoding.UTF8.GetBytes(components[13].Replace((char)0xFFFD, '\r').Replace((char)0x7F, '\n'));
+        //            var owner = int.Parse(components[0]);
+        //            var buildDate = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(int.Parse(components[1]));
+        //            var xOrigin = int.Parse(components[2]);
+        //            var yOrigin = int.Parse(components[3]);
+        //            var zOrigin = int.Parse(components[4]);
+        //            var yaw = int.Parse(components[5]);
+        //            var tilt = int.Parse(components[6]);
+        //            var roll = int.Parse(components[7]);
+        //            var modelLength = int.Parse(components[9]);
+        //            var descriptionLength = int.Parse(components[10]);
+        //            var actionLength = int.Parse(components[11]);
+        //            var payload = Encoding.UTF8.GetBytes(components[13].Replace((char)0xFFFD, '\r').Replace((char)0x7F, '\n'));
 
-                    string model = string.Empty, description = string.Empty, action = string.Empty;
+        //            string model = string.Empty, description = string.Empty, action = string.Empty;
 
-                    if(modelLength > 0)
-                    {
-                        model = Encoding.UTF8.GetString(payload, 0, modelLength);
-                    }
+        //            if(modelLength > 0)
+        //            {
+        //                model = Encoding.UTF8.GetString(payload, 0, modelLength);
+        //            }
 
-                    if (descriptionLength > 0)
-                    {
-                        description = Encoding.UTF8.GetString(payload, modelLength, descriptionLength);
-                    }
+        //            if (descriptionLength > 0)
+        //            {
+        //                description = Encoding.UTF8.GetString(payload, modelLength, descriptionLength);
+        //            }
 
-                    if (actionLength > 0)
-                    {
-                        action = Encoding.UTF8.GetString(payload, modelLength + descriptionLength, actionLength);
-                    }
+        //            if (actionLength > 0)
+        //            {
+        //                action = Encoding.UTF8.GetString(payload, modelLength + descriptionLength, actionLength);
+        //            }
 
-                    yield return new V3Object
-                                     {
-                                         Owner = owner,
-                                         BuildDate = buildDate,
-                                         CellX = CellFromCm(xOrigin),
-                                         CellZ = CellFromCm(zOrigin),
-                                         OffsetX = OffsetFromCm(xOrigin),
-                                         OffsetZ = OffsetFromCm(zOrigin),
-                                         PositionY = yOrigin,
-                                         Yaw = yaw,
-                                         Tilt = tilt,
-                                         Roll = roll,
-                                         ModelName = model,
-                                         Description = description,
-                                         Action = action
-                                     };
-                }
-            }
-        }
+        //            yield return new V3Object
+        //                             {
+        //                                 Owner = owner,
+        //                                 BuildDate = buildDate,
+        //                                 CellX = CellFromCm(xOrigin),
+        //                                 CellZ = CellFromCm(zOrigin),
+        //                                 OffsetX = OffsetFromCm(xOrigin),
+        //                                 OffsetZ = OffsetFromCm(zOrigin),
+        //                                 PositionY = yOrigin,
+        //                                 Yaw = yaw,
+        //                                 Tilt = tilt,
+        //                                 Roll = roll,
+        //                                 ModelName = model,
+        //                                 Description = description,
+        //                                 Action = action
+        //                             };
+        //        }
+        //    }
+        //}
 
         public void Dispose()
         {

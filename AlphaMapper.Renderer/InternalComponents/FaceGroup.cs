@@ -24,8 +24,8 @@ namespace AlphaMapper.Renderer.InternalComponents
     {
         public IndexBuffer IndexBuffer { get; set; }
         public Material Material { get; set; }
-        public WeakReference<ShaderResourceView> Texture { get; set; }
-        public WeakReference<ShaderResourceView> Mask { get; set; }
+        public Byte.Utility.WeakReference<ShaderResourceView> Texture { get; set; }
+        public Byte.Utility.WeakReference<ShaderResourceView> Mask { get; set; }
 
         public void Dispose()
         {

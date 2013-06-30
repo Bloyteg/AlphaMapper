@@ -9,8 +9,9 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Byte.FSharp.Helpers</RootNamespace>
     <AssemblyName>Byte.FSharp.Helpers</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Name>Byte.FSharp.Helpers</Name>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
