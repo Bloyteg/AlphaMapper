@@ -1,4 +1,4 @@
-// Copyright 2013 Joshua R. Rodgers
+﻿// Copyright 2013 Joshua R. Rodgers
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("AlphaMapper.PropertyContext.V3Object")]
-[assembly: AssemblyCopyright("Copyright �  2012")]
+[assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
