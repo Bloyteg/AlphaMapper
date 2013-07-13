@@ -5,7 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AlphaMapper", "AlphaMapper"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlphaMapper.Renderer", "AlphaMapper.Renderer\AlphaMapper.Renderer.csproj", "{78A4979D-A8D7-4ED6-BB87-4F77D6442F5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AphaMapper", "AphaMapper\AphaMapper.csproj", "{FC531DAA-333B-4DA7-A2FE-B8CE84349A7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlphaMapper", "AlphaMapper\AlphaMapper.csproj", "{FC531DAA-333B-4DA7-A2FE-B8CE84349A7B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B78D3E27-94A6-4D51-9C82-75A3E68EA4BA} = {B78D3E27-94A6-4D51-9C82-75A3E68EA4BA}
 		{F6AB8244-41FA-4A22-8F33-5C5230F0CA39} = {F6AB8244-41FA-4A22-8F33-5C5230F0CA39}
