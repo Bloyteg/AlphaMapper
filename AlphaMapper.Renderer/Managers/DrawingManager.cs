@@ -24,7 +24,7 @@ using DXBuffer = SharpDX.Direct3D11.Buffer;
 using ShaderResourceView = SharpDX.Direct3D11.ShaderResourceView;
 using DXTextureAddressMode = SharpDX.Direct3D11.TextureAddressMode;
 using Device = SharpDX.Direct3D11.Device;
-using TextureAddressMode = Byte.IntermediateModel.Components.TextureAddressMode;
+using TextureAddressMode = MrByte.RWX.Model.Components.TextureAddressMode;
 
 namespace AlphaMapper.Renderer.Managers
 {

@@ -14,7 +14,7 @@
 // ========================================================================
 
 using System;
-using Byte.IntermediateModel.Components;
+using MrByte.RWX.Model.Components;
 
 namespace AlphaMapper.Renderer.Components
 {

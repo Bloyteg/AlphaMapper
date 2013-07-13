@@ -13,15 +13,16 @@
 // limitations under the License.
 // ========================================================================
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AlphaMapper.Renderer.Components;
 using AlphaMapper.Renderer.InternalComponents;
-using Byte.IntermediateModel.Components;
-using Byte.Utility;
+using MrByte.RWX.Model.Components;
+using MrByte.Utility;
 using DXBuffer = SharpDX.Direct3D11.Buffer;
 using Matrix = SharpDX.Matrix;
-using Vector3 = Byte.Math.Vector3;
+using Vector3 = MrByte.Math.Vector3;
 
 namespace AlphaMapper.Renderer.Drawables
 {
@@ -173,11 +174,11 @@ namespace AlphaMapper.Renderer.Drawables
                 DrawingManager.SetVertexBuffer(VertexBuffer, IsPrelit);
                 DrawingManager.SetWorldMatrix(WorldMatrix);
 
-                foreach (TagGroup tagGroup in TagGroups)
+                foreach (WeakReference<TagGroup> tagGroup in TagGroups)
                 {
-                    foreach (FaceGroup faceGroup in tagGroup.FaceGroups)
+                    foreach (FaceGroup faceGroup in tagGroup.GetTarget().FaceGroups)
                     {
-                        SetShadowDrawingStates(faceGroup, MaterialOverloads[tagGroup.Tag]);
+                        SetShadowDrawingStates(faceGroup, MaterialOverloads[tagGroup.GetTarget().Tag]);
                         DrawingManager.DrawShadow(faceGroup.IndexBuffer, IsPrelit);
                     }
                 }
@@ -200,14 +201,14 @@ namespace AlphaMapper.Renderer.Drawables
                 DrawingManager.SetVertexBuffer(VertexBuffer, IsPrelit);
                 DrawingManager.SetWorldMatrix(WorldMatrix);
 
-                foreach (TagGroup tagGroup in TagGroups)
+                foreach (WeakReference<TagGroup> tagGroup in TagGroups)
                 {
-                    foreach (FaceGroup faceGroup in tagGroup.FaceGroups)
+                    foreach (FaceGroup faceGroup in tagGroup.GetTarget().FaceGroups)
                     {
                         var isFlat = faceGroup.Material.LightSampling == LightSampling.Facet;
                         var isWireframe = faceGroup.Material.GeometrySampling == GeometrySampling.Wireframe;
 
-                        SetDrawingStates(faceGroup, MaterialOverloads[tagGroup.Tag]);
+                        SetDrawingStates(faceGroup, MaterialOverloads[tagGroup.GetTarget().Tag]);
                         DrawingManager.Draw(faceGroup.IndexBuffer, IsPrelit, isFlat, isWireframe);
                     }
                 }

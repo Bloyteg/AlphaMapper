@@ -13,7 +13,7 @@
 // limitations under the License.
 // ========================================================================
 
-using Byte.Math;
+using MrByte.Math;
 
 namespace AlphaMapper.Renderer
 {

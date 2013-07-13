@@ -20,11 +20,10 @@ using AlphaMapper.Renderer.Components;
 using AlphaMapper.Renderer.Drawables;
 using AlphaMapper.Renderer.InternalComponents;
 using AlphaMapper.Renderer.Managers;
-using Byte.IntermediateModel;
+using MrByte.RWX.Model;
 using SharpDX;
 using SharpDX.Direct3D11;
 using SharpDX.DXGI;
-using SharpDX.Windows;
 using Resource = SharpDX.Direct3D11.Resource;
 
 namespace AlphaMapper.Renderer
@@ -109,7 +108,7 @@ namespace AlphaMapper.Renderer
             _drawingManager.SetGlobalLight(light.ToInternalLight());
         }
 
-        public void SetPostWorldTransform(Byte.Math.Matrix4 matrix)
+        public void SetPostWorldTransform(MrByte.Math.Matrix4 matrix)
         {
             _drawingManager.SetPostWorldMatrix(Matrix.Transpose(matrix.ToDXMatrix()));
         }
@@ -156,7 +155,7 @@ namespace AlphaMapper.Renderer
             {
                 _deviceManager.Context.ResolveSubresource(texture, 0, outTexture, 0, outTexture.Description.Format);
 
-                Texture2D.ToFile(_deviceManager.Context, outTexture, ImageFileFormat.Jpg, fileName);
+                Resource.ToFile(_deviceManager.Context, outTexture, ImageFileFormat.Jpg, fileName);
             }
         }
 

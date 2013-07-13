@@ -13,9 +13,10 @@
 // limitations under the License.
 // ========================================================================
 
+using System;
 using System.Collections.Generic;
 using AlphaMapper.Renderer.InternalComponents;
-using Byte.Utility;
+using MrByte.Utility;
 using SharpDX;
 using DXBuffer = SharpDX.Direct3D11.Buffer;
 
@@ -82,8 +83,8 @@ namespace AlphaMapper.Renderer.Drawables
         /// </value>
         internal DXBuffer VertexBuffer
         {
-            get { return _vertexBuffer; }
-            set { _vertexBuffer = value; }
+            get { return _vertexBuffer.GetTarget(); }
+            set { _vertexBuffer = new WeakReference<DXBuffer>(value); }
         }
 
         /// <summary>
@@ -124,8 +125,8 @@ namespace AlphaMapper.Renderer.Drawables
 
             if (materialOverload.IsColorTint || materialOverload.Color == null)
             {
-                DrawingManager.SetTexture(materialOverload.Texture ?? faceGroup.Texture);
-                DrawingManager.SetMask(materialOverload.Mask ?? faceGroup.Mask);
+                DrawingManager.SetTexture(materialOverload.Texture.GetTarget() ?? faceGroup.Texture.GetTarget());
+                DrawingManager.SetMask(materialOverload.Mask.GetTarget() ?? faceGroup.Mask.GetTarget());
             }
             else
             {
@@ -143,7 +144,7 @@ namespace AlphaMapper.Renderer.Drawables
         {
             if (materialOverload.IsColorTint || materialOverload.Color == null)
             {
-                DrawingManager.SetShadowMask(materialOverload.Mask ?? faceGroup.Mask);
+                DrawingManager.SetShadowMask(materialOverload.Mask.GetTarget() ?? faceGroup.Mask.GetTarget());
             }
             else
             {

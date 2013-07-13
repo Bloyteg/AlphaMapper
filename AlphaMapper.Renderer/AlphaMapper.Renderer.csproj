@@ -95,20 +95,6 @@
     <Compile Include="InternalComponents\VertexLayouts.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Byte.IntermediateModel\Byte.IntermediateModel.csproj">
-      <Project>{D0DE7E74-B546-4BD1-A4AC-F4DC4EB959AD}</Project>
-      <Name>Byte.IntermediateModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Byte.Math\Byte.Math.csproj">
-      <Project>{B78D3E27-94A6-4D51-9C82-75A3E68EA4BA}</Project>
-      <Name>Byte.Math</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Byte.Utility\Byte.Utility.csproj">
-      <Project>{F6AB8244-41FA-4A22-8F33-5C5230F0CA39}</Project>
-      <Name>Byte.Utility</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -126,6 +112,20 @@
   <ItemGroup>
     <Content Include="sharpdx_direct3d11_effects_x64.dll" />
     <Content Include="sharpdx_direct3d11_effects_x86.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AW.Tools\MrByte.IntermediateModel\MrByte.RWX.Model.csproj">
+      <Project>{d0de7e74-b546-4bd1-a4ac-f4dc4eb959ad}</Project>
+      <Name>MrByte.RWX.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AW.Tools\MrByte.Math\MrByte.Math.csproj">
+      <Project>{b78d3e27-94a6-4d51-9c82-75a3e68ea4ba}</Project>
+      <Name>MrByte.Math</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AW.Tools\MrByte.Utility\MrByte.Utility.csproj">
+      <Project>{f6ab8244-41fa-4a22-8f33-5c5230f0ca39}</Project>
+      <Name>MrByte.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

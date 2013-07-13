@@ -13,17 +13,18 @@
 // limitations under the License.
 // ========================================================================
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using AlphaMapper.Renderer.Components;
 using AlphaMapper.Renderer.Drawables;
 using AlphaMapper.Renderer.InternalComponents;
-using Byte.IntermediateModel;
-using Byte.IntermediateModel.Components;
-using Byte.IntermediateModel.Mesh;
-using Byte.IntermediateModel.Primitive;
-using Byte.Utility;
+using MrByte.RWX.Model;
+using MrByte.RWX.Model.Components;
+using MrByte.RWX.Model.Mesh;
+using MrByte.RWX.Model.Primitive;
+using MrByte.Utility;
 using SharpDX;
 using SharpDX.Direct3D11;
 using DXBuffer = SharpDX.Direct3D11.Buffer;
@@ -161,13 +162,13 @@ namespace AlphaMapper.Renderer.Managers
             //Build mesh cache
             MeshCache meshCache;
 
-            if (geometry is Clump)
+            var clump = geometry as Clump;
+            if (clump != null)
             {
-                var clump = (Clump) geometry;
                 meshCache = new MeshCache(vertexBuffer,
                                           tagGroups,
                                           clump.Transform.ToDXMatrix(),
-                                          geometry.IsPrelit,
+                                          clump.IsPrelit,
                                           clump.Tag);
             }
             else
@@ -313,8 +314,8 @@ namespace AlphaMapper.Renderer.Managers
                                                             {
                                                                 IndexBuffer = new IndexBuffer(_device, indices.ToArray()),
                                                                 Material = material,
-                                                                Texture = texture,
-                                                                Mask = mask
+                                                                Texture = new WeakReference<ShaderResourceView>(texture),
+                                                                Mask = new WeakReference<ShaderResourceView>(mask)
                                                             }).ToList(),
                                }).ToList();
         }
@@ -370,9 +371,9 @@ namespace AlphaMapper.Renderer.Managers
         {
             var overloads = materialOverloads == null ? new List<MaterialOverload>() : materialOverloads.ToList();
 
-            foreach (TagGroup tagGroup in mesh.TagGroups)
+            foreach (WeakReference<TagGroup> tagGroup in mesh.TagGroups)
             {
-                mesh.MaterialOverloads.Add(tagGroup.Tag, BuildTagGroupMaterialOverloads(tagGroup.Tag.Value, overloads));
+                mesh.MaterialOverloads.Add(tagGroup.GetTarget().Tag, BuildTagGroupMaterialOverloads(tagGroup.GetTarget().Tag.Value, overloads));
             }
 
             foreach(var child in mesh.Children.OfType<MeshDrawableBase>())
@@ -394,8 +395,8 @@ namespace AlphaMapper.Renderer.Managers
             {
                 var overload = overloads.FirstOrDefault() ?? overloads.Last();
 
-                result.Texture = GetTexture(overload.Texture, false);
-                result.Mask = GetTexture(overload.Mask, true);
+                result.Texture = new WeakReference<ShaderResourceView>(GetTexture(overload.Texture, false));
+                result.Mask = new WeakReference<ShaderResourceView>(GetTexture(overload.Mask, true));
                 result.Opacity = overload.Opacity;
                 result.Color = overload.Color;
                 result.IsColorTint = overload.IsColorTint;
