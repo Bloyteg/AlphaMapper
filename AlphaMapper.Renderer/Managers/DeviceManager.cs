@@ -17,12 +17,13 @@ using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using AlphaMapper.Renderer.InternalComponents;
-using SlimDX;
-using SlimDX.D3DCompiler;
-using SlimDX.Direct3D11;
-using SlimDX.DXGI;
-using Device = SlimDX.Direct3D11.Device;
-using Resource = SlimDX.Direct3D11.Resource;
+using SharpDX;
+using SharpDX.D3DCompiler;
+using SharpDX.Direct3D;
+using SharpDX.Direct3D11;
+using SharpDX.DXGI;
+using Device = SharpDX.Direct3D11.Device;
+using Resource = SharpDX.Direct3D11.Resource;
 
 namespace AlphaMapper.Renderer.Managers
 {
@@ -152,7 +153,7 @@ namespace AlphaMapper.Renderer.Managers
 
             using (var factory = SwapChain.GetParent<Factory>())
             {
-                factory.SetWindowAssociation(_targetControl.Handle, WindowAssociationFlags.IgnoreAltEnter);
+                factory.MakeWindowAssociation(_targetControl.Handle, WindowAssociationFlags.IgnoreAltEnter);
             }
         }
 
@@ -248,7 +249,7 @@ namespace AlphaMapper.Renderer.Managers
                                    new InputElement(TransformName, 0, Format.R32G32B32A32_Float, 0, 1, InputClassification.PerInstanceData, 1),
                                    new InputElement(TransformName, 1, Format.R32G32B32A32_Float, 16, 1, InputClassification.PerInstanceData, 1),
                                    new InputElement(TransformName, 2, Format.R32G32B32A32_Float, 32, 1, InputClassification.PerInstanceData, 1),
-                                   new InputElement(TransformName, 3, Format.R32G32B32A32_Float, 48, 1, InputClassification.PerInstanceData, 1),
+                                   new InputElement(TransformName, 3, Format.R32G32B32A32_Float, 48, 1, InputClassification.PerInstanceData, 1)
                                };
 
             return BuildLayout(effect, device, Resources.StandardSmoothTechnique, elements);
@@ -277,7 +278,7 @@ namespace AlphaMapper.Renderer.Managers
                                    new InputElement(TransformName, 0, Format.R32G32B32A32_Float, 0, 1, InputClassification.PerInstanceData, 1),
                                    new InputElement(TransformName, 1, Format.R32G32B32A32_Float, 16, 1, InputClassification.PerInstanceData, 1),
                                    new InputElement(TransformName, 2, Format.R32G32B32A32_Float, 32, 1, InputClassification.PerInstanceData, 1),
-                                   new InputElement(TransformName, 3, Format.R32G32B32A32_Float, 48, 1, InputClassification.PerInstanceData, 1),
+                                   new InputElement(TransformName, 3, Format.R32G32B32A32_Float, 48, 1, InputClassification.PerInstanceData, 1)
                                };
 
             return BuildLayout(effect, device, Resources.PrelitSmoothTechnique, elements);
@@ -319,13 +320,13 @@ namespace AlphaMapper.Renderer.Managers
         /// </summary>
         public void StartShadowMapRender()
         {
-            Effect.GetVariableByName("g_ShadowMap").AsResource().SetResource(null);
+            Effect.GetVariableByName("g_ShadowMap").AsShaderResource().SetResource(null);
 
             //Set output merger stage.
             Context.OutputMerger.SetTargets(ShadowMapDepthStencilResource, (RenderTargetView)null);
 
             //Setup the view port.
-            var viewport = new Viewport(0.0f, 0.0f, 4096f, 4096f);
+            var viewport = new Viewport(0, 0, 4096, 4096);
             Context.Rasterizer.SetViewports(viewport);
 
             //Clear views.
@@ -339,14 +340,14 @@ namespace AlphaMapper.Renderer.Managers
         {
             Context.OutputMerger.SetTargets(DepthStencilView, RenderTargetView);
 
-            Effect.GetVariableByName("g_ShadowMap").AsResource().SetResource(ShadowMapDepthStencilResource);
+            Effect.GetVariableByName("g_ShadowMap").AsShaderResource().SetResource(ShadowMapDepthStencilResource);
 
             //Setup the view port.
-            var viewport = new Viewport(0.0f, 0.0f, _targetControl.ClientSize.Width, _targetControl.ClientSize.Height);
+            var viewport = new Viewport(0, 0, _targetControl.ClientSize.Width, _targetControl.ClientSize.Height);
             Context.Rasterizer.SetViewports(viewport);
 
             //Clear views.
-            Context.ClearRenderTargetView(RenderTargetView, new Color4(0, 0, 0));
+            Context.ClearRenderTargetView(RenderTargetView, new Color4(0, 0, 0, 1));
             Context.ClearDepthStencilView(DepthStencilView, DepthStencilClearFlags.Depth | DepthStencilClearFlags.Stencil, 1.0f, 0);
         }
 
@@ -417,19 +418,25 @@ namespace AlphaMapper.Renderer.Managers
             };
 
             var shaderResourceViewDescription = new ShaderResourceViewDescription
-                                                {
-                                                    Format = Format.R32_Float,
-                                                    Dimension = ShaderResourceViewDimension.Texture2D,
-                                                    MipLevels = textureDescription.MipLevels,
-                                                    MostDetailedMip = 0
-                                                };
+                {
+                    Format = Format.R32_Float,
+                    Dimension = ShaderResourceViewDimension.Texture2D,
+                    Texture2D =
+                        {
+                            MipLevels = 1, 
+MostDetailedMip = 0
+                        }
+                };
 
             var depthStencilViewDescription = new DepthStencilViewDescription
-                                                  {
-                                                      Format = Format.D32_Float,
-                                                      Dimension = DepthStencilViewDimension.Texture2D,
-                                                      MipSlice = 0
-                                                  };
+                {
+                    Format = Format.D32_Float,
+                    Dimension = DepthStencilViewDimension.Texture2D,
+                    Texture2D =
+                        {
+                            MipSlice = 0
+                        }
+                };
 
             //Setup a depth stencill resource.
             ShadowMapDepthStencilResource = new DepthStencilViewResource(device, textureDescription,

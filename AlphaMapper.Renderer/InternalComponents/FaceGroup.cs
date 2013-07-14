@@ -14,9 +14,8 @@
 // ========================================================================
 
 using System;
-using Byte.IntermediateModel.Components;
-using SlimDX.Direct3D11;
-using Byte.Utility;
+using MrByte.RWX.Model.Components;
+using SharpDX.Direct3D11;
 
 namespace AlphaMapper.Renderer.InternalComponents
 {
@@ -24,8 +23,8 @@ namespace AlphaMapper.Renderer.InternalComponents
     {
         public IndexBuffer IndexBuffer { get; set; }
         public Material Material { get; set; }
-        public Byte.Utility.WeakReference<ShaderResourceView> Texture { get; set; }
-        public Byte.Utility.WeakReference<ShaderResourceView> Mask { get; set; }
+        public WeakReference<ShaderResourceView> Texture { get; set; }
+        public WeakReference<ShaderResourceView> Mask { get; set; }
 
         public void Dispose()
         {

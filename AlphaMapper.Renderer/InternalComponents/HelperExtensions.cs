@@ -13,17 +13,18 @@
 // limitations under the License.
 // ========================================================================
 
-using Byte.IntermediateModel.Components;
-using Byte.Math;
-using SlimDX;
-using Vector2 = SlimDX.Vector2;
-using Vector3 = SlimDX.Vector3;
+using MrByte.RWX.Model.Components;
+using MrByte.Math;
+using SharpDX;
+using Color = MrByte.RWX.Model.Components.Color;
+using Vector2 = SharpDX.Vector2;
+using Vector3 = SharpDX.Vector3;
 
 namespace AlphaMapper.Renderer.InternalComponents
 {
     internal static class HelperExtensions
     {
-        public static Vector3 ToDXVector3(this Byte.Math.Vector3 vector)
+        public static Vector3 ToDXVector3(this MrByte.Math.Vector3 vector)
         {
             if (vector == null)
             {
@@ -33,7 +34,7 @@ namespace AlphaMapper.Renderer.InternalComponents
             return new Vector3((float)vector.X, (float)vector.Y, (float)vector.Z);
         }
 
-        public static Vector2 ToDXVector2(this Byte.Math.Vector2 vector)
+        public static Vector2 ToDXVector2(this MrByte.Math.Vector2 vector)
         {
             if (vector == null)
             {
@@ -83,7 +84,7 @@ namespace AlphaMapper.Renderer.InternalComponents
 
         public static Color4 ToDXColor4(this Color color)
         {
-            return new Color4(color.R, color.G, color.B);
+            return new Color4(color.ToDXColor3(), 1);
         }
 
         public static Color3 ToDXColor3(this Color color)

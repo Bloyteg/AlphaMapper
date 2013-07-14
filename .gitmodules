@@ -1,0 +1,3 @@
+[submodule "AW.Tools"]
+	path = AW.Tools
+	url = https://github.com/Mr-Byte/AW.Tools.git

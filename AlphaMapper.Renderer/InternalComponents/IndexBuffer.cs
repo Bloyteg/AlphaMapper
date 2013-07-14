@@ -14,9 +14,9 @@
 // ========================================================================
 
 using System;
-using SlimDX;
-using SlimDX.Direct3D11;
-using Buffer = SlimDX.Direct3D11.Buffer;
+using SharpDX;
+using SharpDX.Direct3D11;
+using Buffer = SharpDX.Direct3D11.Buffer;
 
 namespace AlphaMapper.Renderer.InternalComponents
 {

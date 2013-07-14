@@ -13,18 +13,7 @@
 // limitations under the License.
 // ========================================================================
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using AlphaMapper.Property.Model;
 using AlphaMapper.Renderer;
-using AlphaMapper.Renderer.Components;
-using AlphaMapper.Renderer.Drawables;
-using Byte.ActionCommandTranslator;
-using Vector3 = Byte.Math.Vector3;
 
 namespace AlphaMapper.Property.SceneBuilder
 {

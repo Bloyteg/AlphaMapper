@@ -14,8 +14,8 @@
 // ========================================================================
 
 using AlphaMapper.Renderer.InternalComponents;
-using SlimDX;
-using Vector3 = Byte.Math.Vector3;
+using SharpDX;
+using Vector3 = MrByte.Math.Vector3;
 
 namespace AlphaMapper.Renderer.Components
 {

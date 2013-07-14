@@ -13,9 +13,9 @@
 // limitations under the License.
 // ========================================================================
 
-using Byte.IntermediateModel.Components;
-using Byte.Utility;
-using SlimDX.Direct3D11;
+using System;
+using MrByte.RWX.Model.Components;
+using SharpDX.Direct3D11;
 
 namespace AlphaMapper.Renderer.InternalComponents
 {

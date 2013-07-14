@@ -14,7 +14,7 @@
 // ========================================================================
 
 using AlphaMapper.Renderer.Components;
-using Byte.Math;
+using MrByte.Math;
 
 namespace AlphaMapper.Renderer.InternalComponents
 {
