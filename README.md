@@ -1,5 +1,7 @@
 # AlphaMapper 2.0
 
+[![Build status](https://ci.appveyor.com/api/projects/status/bmr26jawropnh67e?svg=true)](https://ci.appveyor.com/project/Mr-Byte/alphamapper)
+
 A recreation of the original AlphaMapper as a more robust implementation that is more capable and feature rich.
 
 ## Copyright and license
