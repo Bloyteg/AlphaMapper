@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>f2844513</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,20 +35,41 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bloyteg.AW.Math">
+      <HintPath>..\packages\Bloyteg.AW.Math.1.0.6\lib\net45\Bloyteg.AW.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="Bloyteg.AW.Model.RWX">
+      <HintPath>..\packages\Bloyteg.AW.Model.RWX.1.0.12\lib\net45\Bloyteg.AW.Model.RWX.dll</HintPath>
+    </Reference>
+    <Reference Include="Bloyteg.AW.Model.RWX.Data">
+      <HintPath>..\packages\Bloyteg.AW.Model.RWX.1.0.12\lib\net45\Bloyteg.AW.Model.RWX.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Bloyteg.AW.Model.RWX.Parser">
+      <HintPath>..\packages\Bloyteg.AW.Model.RWX.1.0.12\lib\net45\Bloyteg.AW.Model.RWX.Parser.dll</HintPath>
+    </Reference>
+    <Reference Include="FParsec">
+      <HintPath>..\packages\FParsec-Big-Data-Edition.1.0.1\lib\net45\FParsec.dll</HintPath>
+    </Reference>
+    <Reference Include="FParsecCS">
+      <HintPath>..\packages\FParsec-Big-Data-Edition.1.0.1\lib\net45\FParsecCS.dll</HintPath>
+    </Reference>
+    <Reference Include="LibTessDotNet">
+      <HintPath>..\packages\LibTessDotNet.1.0.1\lib\net20\LibTessDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="SharpDX">
-      <HintPath>..\packages\SharpDX.2.4.2\lib\net40\SharpDX.dll</HintPath>
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.D3DCompiler">
-      <HintPath>..\packages\SharpDX.D3DCompiler.2.4.2\lib\net40\SharpDX.D3DCompiler.dll</HintPath>
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.D3DCompiler.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D11">
-      <HintPath>..\packages\SharpDX.Direct3D11.2.4.2\lib\net40\SharpDX.Direct3D11.dll</HintPath>
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.Direct3D11.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D11.Effects">
-      <HintPath>..\packages\SharpDX.Direct3D11.Effects.2.4.2\lib\net40\SharpDX.Direct3D11.Effects.dll</HintPath>
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.Direct3D11.Effects.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.DXGI">
-      <HintPath>..\packages\SharpDX.DXGI.2.4.2\lib\net40\SharpDX.DXGI.dll</HintPath>
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.DXGI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -65,7 +87,6 @@
     <Compile Include="InternalComponents\DeferredVertex.cs" />
     <Compile Include="InternalComponents\DepthStencilViewResource.cs" />
     <Compile Include="InternalComponents\FaceGroup.cs" />
-    <Compile Include="InternalComponents\HelperExtensions.cs" />
     <Compile Include="InternalComponents\IndexBuffer.cs" />
     <Compile Include="InternalComponents\IRenderTransformable.cs" />
     <Compile Include="InternalComponents\Light.cs" />
@@ -93,6 +114,8 @@
     <Compile Include="Managers\DeviceManager.cs" />
     <Compile Include="InternalComponents\StandardVertex.cs" />
     <Compile Include="InternalComponents\VertexLayouts.cs" />
+    <Compile Include="Utility\HelperExtensions.cs" />
+    <Compile Include="Utility\WeakReferenceExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
@@ -113,25 +136,18 @@
     <Content Include="sharpdx_direct3d11_effects_x64.dll" />
     <Content Include="sharpdx_direct3d11_effects_x86.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AW.Tools\MrByte.IntermediateModel\MrByte.RWX.Model.csproj">
-      <Project>{d0de7e74-b546-4bd1-a4ac-f4dc4eb959ad}</Project>
-      <Name>MrByte.RWX.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AW.Tools\MrByte.Math\MrByte.Math.csproj">
-      <Project>{b78d3e27-94a6-4d51-9c82-75a3e68ea4ba}</Project>
-      <Name>MrByte.Math</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AW.Tools\MrByte.Utility\MrByte.Utility.csproj">
-      <Project>{f6ab8244-41fa-4a22-8f33-5c5230f0ca39}</Project>
-      <Name>MrByte.Utility</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\SharpDX.2.6.3\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.3\build\SharpDX.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\SharpDX.2.6.3\build\SharpDX.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SharpDX.2.6.3\build\SharpDX.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -14,7 +14,7 @@
 // ========================================================================
 
 using System;
-using MrByte.RWX.Model.Components;
+using Bloyteg.AW.Model.RWX.Data.Components;
 using SharpDX.Direct3D11;
 
 namespace AlphaMapper.Renderer.InternalComponents

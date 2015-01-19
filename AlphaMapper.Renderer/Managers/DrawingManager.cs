@@ -24,7 +24,7 @@ using DXBuffer = SharpDX.Direct3D11.Buffer;
 using ShaderResourceView = SharpDX.Direct3D11.ShaderResourceView;
 using DXTextureAddressMode = SharpDX.Direct3D11.TextureAddressMode;
 using Device = SharpDX.Direct3D11.Device;
-using TextureAddressMode = MrByte.RWX.Model.Components.TextureAddressMode;
+using TextureAddressMode = Bloyteg.AW.Model.RWX.Data.Components.TextureAddressMode;
 
 namespace AlphaMapper.Renderer.Managers
 {
@@ -144,11 +144,6 @@ namespace AlphaMapper.Renderer.Managers
 
         }
 
-        /// <summary>
-        /// Updates the state.
-        /// </summary>
-        /// <param name="drawingState">State of the drawing.</param>
-        /// <param name="topologyState">State of the topology.</param>
         private void UpdateState(DrawingState drawingState, PrimitiveTopologyState topologyState)
         {
             if (drawingState != _currentDrawingState)
@@ -206,10 +201,6 @@ namespace AlphaMapper.Renderer.Managers
             }
         }
 
-        /// <summary>
-        /// Updates the state of the shadow.
-        /// </summary>
-        /// <param name="isPrelit">if set to <c>true</c> [is prelit].</param>
         private void UpdateShadowState(bool isPrelit)
         {
             _currentDrawingState = DrawingState.Unknown;
@@ -220,13 +211,6 @@ namespace AlphaMapper.Renderer.Managers
             _context.InputAssembler.PrimitiveTopology = PrimitiveTopology.TriangleList;
         }
 
-        /// <summary>
-        /// Gets the state of the drawing.
-        /// </summary>
-        /// <param name="isPrelit">if set to <c>true</c> [is prelit].</param>
-        /// <param name="isFlat">if set to <c>true</c> [is flat].</param>
-        /// <param name="isWireframe">if set to <c>true</c> [is wireframe].</param>
-        /// <returns></returns>
         private static DrawingState GetDrawingState(bool isPrelit, bool isFlat, bool isWireframe)
         {
             if(isPrelit && isWireframe)
@@ -257,21 +241,11 @@ namespace AlphaMapper.Renderer.Managers
             return DrawingState.Standard;
         }
 
-        /// <summary>
-        /// Gets the state of the primitive topology.
-        /// </summary>
-        /// <param name="isWireframe">if set to <c>true</c> [is wireframe].</param>
-        /// <returns></returns>
         private static PrimitiveTopologyState GetPrimitiveTopologyState(bool isWireframe)
         {
             return isWireframe ? PrimitiveTopologyState.LineList : PrimitiveTopologyState.TriangleList;
         }
 
-        /// <summary>
-        /// Gets the address mode.
-        /// </summary>
-        /// <param name="textureAddressMode">The texture address mode.</param>
-        /// <returns></returns>
         private static DXTextureAddressMode GetAddressMode(TextureAddressMode textureAddressMode)
         {
             switch (textureAddressMode)
@@ -290,13 +264,6 @@ namespace AlphaMapper.Renderer.Managers
             }
         }
 
-        /// <summary>
-        /// Draws the specified index buffer.
-        /// </summary>
-        /// <param name="indexBuffer">The index buffer.</param>
-        /// <param name="isPrelit">if set to <c>true</c> [is prelit].</param>
-        /// <param name="isFlat">if set to <c>true</c> [is flat].</param>
-        /// <param name="isWireframe">if set to <c>true</c> [is wireframe].</param>
         public void Draw(IndexBuffer indexBuffer, bool isPrelit = false, bool isFlat = false, bool isWireframe = false)
         {
             UpdateState(GetDrawingState(isPrelit, isFlat, isWireframe), GetPrimitiveTopologyState(isWireframe));
@@ -311,11 +278,6 @@ namespace AlphaMapper.Renderer.Managers
 
         }
 
-        /// <summary>
-        /// Draws the shadow.
-        /// </summary>
-        /// <param name="indexBuffer">The index buffer.</param>
-        /// <param name="isPrelit">if set to <c>true</c> [is prelit].</param>
         public void DrawShadow(IndexBuffer indexBuffer, bool isPrelit = false)
         {
             UpdateShadowState(isPrelit);
@@ -329,14 +291,6 @@ namespace AlphaMapper.Renderer.Managers
             }
         }
 
-        /// <summary>
-        /// Draws the specified index buffer.
-        /// </summary>
-        /// <param name="faceGroup">The index buffer.</param>
-        /// <param name="instanceCount">The instance count.</param>
-        /// <param name="isPrelit">if set to <c>true</c> is prelit.</param>
-        /// <param name="isFlat">if set to <c>true</c> is flat.</param>
-        /// <param name="isWireframe">if set to <c>true</c> is wireframe.</param>
         public void Draw(IndexBuffer faceGroup, int instanceCount, bool isPrelit = false, bool isFlat = false, bool isWireframe = false)
         {
             UpdateState(GetDrawingState(isPrelit, isFlat, isWireframe), GetPrimitiveTopologyState(isWireframe));
@@ -350,12 +304,6 @@ namespace AlphaMapper.Renderer.Managers
             }
         }
 
-        /// <summary>
-        /// Draws the shadow.
-        /// </summary>
-        /// <param name="faceGroup">The face group.</param>
-        /// <param name="instanceCount">The instance count.</param>
-        /// <param name="isPrelit">if set to <c>true</c> [is prelit].</param>
         public void DrawShadow(IndexBuffer faceGroup, int instanceCount, bool isPrelit = false)
         {
             UpdateShadowState(isPrelit);
@@ -369,23 +317,12 @@ namespace AlphaMapper.Renderer.Managers
             }
         }
 
-        /// <summary>
-        /// Sets the vertex buffer.
-        /// </summary>
-        /// <param name="vertexBuffer">The vertex buffer.</param>
-        /// <param name="isPrelit">if set to <c>true</c> [is prelit].</param>
         public void SetVertexBuffer(DXBuffer vertexBuffer, bool isPrelit)
         {
             var stride = isPrelit ? PrelitVertex.Size : StandardVertex.Size;
             _context.InputAssembler.SetVertexBuffers(0, new VertexBufferBinding(vertexBuffer, stride, 0));
         }
 
-        /// <summary>
-        /// Sets the vertex and transform buffers.
-        /// </summary>
-        /// <param name="vertexBuffer">The vertex buffer.</param>
-        /// <param name="transformBuffer">The transform buffer.</param>
-        /// <param name="isPrelit">if set to <c>true</c> [is prelit].</param>
         public void SetVertexAndTransformBuffers(DXBuffer vertexBuffer, DXBuffer transformBuffer, bool isPrelit)
         {
             var stride = isPrelit ? PrelitVertex.Size : StandardVertex.Size;
@@ -397,83 +334,47 @@ namespace AlphaMapper.Renderer.Managers
                                                          });
         }
 
-        /// <summary>
-        /// Sets the world matrix.
-        /// </summary>
-        /// <param name="worldMatrix">The world matrix.</param>
         public void SetWorldMatrix(Matrix worldMatrix)
         {
             _shadowWorldMatrix.SetMatrix(worldMatrix);
             _worldMatrix.SetMatrix(worldMatrix);
         }
 
-        /// <summary>
-        /// Sets the post world matrix.
-        /// </summary>
-        /// <param name="postWorldMatrix">The post world matrix.</param>
         public void SetPostWorldMatrix(Matrix postWorldMatrix)
         {
             _postWorldMatrix.SetMatrix(postWorldMatrix);
         }
 
-        /// <summary>
-        /// Sets the projection matrix.
-        /// </summary>
-        /// <param name="projectionMatrix">The projection matrix.</param>
         public void SetProjectionMatrix(Matrix projectionMatrix)
         {
             _projectionMatrix.SetMatrix(projectionMatrix);
         }
 
-        /// <summary>
-        /// Sets the view matrix.
-        /// </summary>
-        /// <param name="viewMatrix">The view matrix.</param>
         public void SetViewMatrix(Matrix viewMatrix)
         {
             _viewMatrix.SetMatrix(viewMatrix);
         }
 
-        /// <summary>
-        /// Sets the opacity.
-        /// </summary>
-        /// <param name="opacity">The opacity.</param>
         public void SetOpacity(float opacity)
         {
             _opacity.Set(opacity);
         }
 
-        /// <summary>
-        /// Sets the ambient.
-        /// </summary>
-        /// <param name="ambient">The ambient.</param>
         public void SetAmbient(float ambient)
         {
             _ambient.Set(ambient);
         }
 
-        /// <summary>
-        /// Sets the diffuse.
-        /// </summary>
-        /// <param name="diffuse">The diffuse.</param>
         public void SetDiffuse(float diffuse)
         {
             _diffuse.Set(diffuse);
         }
 
-        /// <summary>
-        /// Sets the color.
-        /// </summary>
-        /// <param name="color">The color.</param>
         public void SetColor(Color4 color)
         {
             _color.Set(color);
         }
 
-        /// <summary>
-        /// Sets the texture.  If texture is null, then the material color will be used.
-        /// </summary>
-        /// <param name="texture">The texture.</param>
         public void SetTexture(ShaderResourceView texture)
         {
             if(texture != null)
@@ -487,10 +388,6 @@ namespace AlphaMapper.Renderer.Managers
             }
         }
 
-        /// <summary>
-        /// Sets the mask.
-        /// </summary>
-        /// <param name="mask">The mask.</param>
         public void SetMask(ShaderResourceView mask)
         {
             if(mask != null)
@@ -504,10 +401,6 @@ namespace AlphaMapper.Renderer.Managers
             }
         }
 
-        /// <summary>
-        /// Sets the shadow mask.
-        /// </summary>
-        /// <param name="mask">The mask.</param>
         public void SetShadowMask(ShaderResourceView mask)
         {
             if (mask != null)
@@ -521,10 +414,6 @@ namespace AlphaMapper.Renderer.Managers
             } 
         }
 
-        /// <summary>
-        /// Sets the global light.
-        /// </summary>
-        /// <param name="light">The light.</param>
         public void SetGlobalLight(Light light)
         {
             using (var dataStream = new DataStream(Marshal.SizeOf(typeof(Light)), true, true))
@@ -543,10 +432,6 @@ namespace AlphaMapper.Renderer.Managers
             _lightViewProjectionMatrix.SetMatrix(result);
         }
 
-        /// <summary>
-        /// Sets the texture address mode.
-        /// </summary>
-        /// <param name="textureAddressMode">The texture address mode.</param>
         public void SetTextureAddressMode(TextureAddressMode textureAddressMode)
         {
             if(_currentTextureAddressMode == textureAddressMode)
@@ -570,18 +455,11 @@ namespace AlphaMapper.Renderer.Managers
             samplerState.Dispose();
         }
 
-        /// <summary>
-        /// Sets the state of the color tint.
-        /// </summary>
-        /// <param name="enabled">if set to <c>true</c> [enabled].</param>
         public void SetColorTintState(bool enabled)
         {
             _isColorTinted.Set(enabled);
         }
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
         public void Dispose()
         {
 

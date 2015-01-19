@@ -18,11 +18,11 @@ using System.Collections.Generic;
 using System.Linq;
 using AlphaMapper.Renderer.Components;
 using AlphaMapper.Renderer.InternalComponents;
-using MrByte.RWX.Model.Components;
-using MrByte.Utility;
+using AlphaMapper.Renderer.Utility;
+using Bloyteg.AW.Model.RWX.Data.Components;
 using DXBuffer = SharpDX.Direct3D11.Buffer;
 using Matrix = SharpDX.Matrix;
-using Vector3 = MrByte.Math.Vector3;
+using Vector3 = Bloyteg.AW.Math.Vector3;
 
 namespace AlphaMapper.Renderer.Drawables
 {
@@ -34,11 +34,6 @@ namespace AlphaMapper.Renderer.Drawables
         private VectorPair _worldSkew = new VectorPair(new Vector3(), new Vector3());
         private SkewType _worldSkewType;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MeshDrawable"/> class.
-        /// </summary>
-        /// <param name="vertexBuffer">The vertex buffer.</param>
-        /// <param name="tagGroups">The tag groups.</param>
         internal MeshDrawable(DXBuffer vertexBuffer, IEnumerable<TagGroup> tagGroups)
         {
             WorldMatrix = Matrix.Identity;
@@ -46,20 +41,11 @@ namespace AlphaMapper.Renderer.Drawables
             TagGroups.AddRange(tagGroups.Select(tagGroup => new WeakReference<TagGroup>(tagGroup)));
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MeshDrawable"/> class.
-        /// </summary>
         public MeshDrawable()
         {
             //Does nothing.    
         }
 
-        /// <summary>
-        /// Gets or sets the world position.
-        /// </summary>
-        /// <value>
-        /// The world position.
-        /// </value>
         public Vector3 WorldPosition
         {
             get { return _worldPosition; }
@@ -75,12 +61,6 @@ namespace AlphaMapper.Renderer.Drawables
             }
         }
 
-        /// <summary>
-        /// Gets or sets the world rotation.
-        /// </summary>
-        /// <value>
-        /// The world rotation.
-        /// </value>
         public Vector3 WorldRotation
         {
             get { return _worldRotation; }
@@ -96,12 +76,6 @@ namespace AlphaMapper.Renderer.Drawables
             }
         }
 
-        /// <summary>
-        /// Gets or sets the world scale.
-        /// </summary>
-        /// <value>
-        /// The world scale.
-        /// </value>
         public Vector3 WorldScale
         {
             get { return _worldScale; }
@@ -117,12 +91,6 @@ namespace AlphaMapper.Renderer.Drawables
             }
         }
 
-        /// <summary>
-        /// Gets or sets the world skew.
-        /// </summary>
-        /// <value>
-        /// The world skew.
-        /// </value>
         public VectorPair WorldSkew
         {
             get { return _worldSkew; }
@@ -138,12 +106,6 @@ namespace AlphaMapper.Renderer.Drawables
             }
         }
 
-        /// <summary>
-        /// Gets or sets the type of the skew.
-        /// </summary>
-        /// <value>
-        /// The type of the skew.
-        /// </value>
         public SkewType WorldSkewType
         {
             get { return _worldSkewType; }
@@ -159,14 +121,8 @@ namespace AlphaMapper.Renderer.Drawables
             }
         }
 
-        /// <summary>
-        /// Gets the world matrix.
-        /// </summary>
         internal Matrix WorldMatrix { get; private set; }
 
-        /// <summary>
-        /// Draws the shadow.
-        /// </summary>
         public override void DrawShadow()
         {
             if (VertexBuffer != null)
@@ -191,9 +147,6 @@ namespace AlphaMapper.Renderer.Drawables
             }
         }
 
-        /// <summary>
-        /// Draws this instance.
-        /// </summary>
         public override void Draw()
         {
             if (VertexBuffer != null)
@@ -214,24 +167,17 @@ namespace AlphaMapper.Renderer.Drawables
                 }
             }
 
-            //Draw children
             foreach (var child in Children)
             {
                 child.Draw();
             }
         }
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
         public override void Dispose()
         {
             //Does nothing right now.
         }
 
-        /// <summary>
-        /// Updates the matrix.
-        /// </summary>
         protected override void UpdateMatrix()
         {
             WorldMatrix = ModelMatrix * this.GetTransformMatrix();

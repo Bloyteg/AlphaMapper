@@ -110,11 +110,6 @@ namespace AlphaMapper.Renderer.Managers
 
         #endregion
 
-        /// <summary>
-        /// Called when target control resized.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void OnTargetControlResize(object sender, EventArgs e)
         {
             RenderTargetView.Dispose();
@@ -139,9 +134,6 @@ namespace AlphaMapper.Renderer.Managers
             }
         }
 
-        /// <summary>
-        /// Initializes the renderer components.
-        /// </summary>
         private void InitializeRendererComponents()
         {
             Device = GetDevice();
@@ -157,10 +149,6 @@ namespace AlphaMapper.Renderer.Managers
             }
         }
 
-        /// <summary>
-        /// Gets the device.
-        /// </summary>_targetControl
-        /// <returns></returns>
         private Device GetDevice()
         {
             Device device;
@@ -192,12 +180,6 @@ namespace AlphaMapper.Renderer.Managers
             return device;
         }
 
-        /// <summary>
-        /// Gets the effect.
-        /// </summary>
-        /// <param name="device">The device.</param>
-        /// <param name="effectBytes">The effect bytes.</param>
-        /// <returns></returns>
         private static Effect GetEffect(Device device, byte[] effectBytes)
         {
             Effect effect;
@@ -216,24 +198,12 @@ namespace AlphaMapper.Renderer.Managers
             return effect;
         }
 
-        /// <summary>
-        /// Gets the vertex layouts.
-        /// </summary>
-        /// <param name="device">The device.</param>
-        /// <param name="effect">The effect.</param>
-        /// <returns></returns>
         private static VertexLayouts GetVertexLayouts(Device device, Effect effect)
         {
             return new VertexLayouts(GetStandardVertexLayout(device, effect),
                                      GetPrelitVertexLayout(device, effect));
         }
 
-        /// <summary>
-        /// Gets the standard vertex layout.
-        /// </summary>
-        /// <param name="device">The device.</param>
-        /// <param name="effect">The effect.</param>
-        /// <returns></returns>
         private static InputLayout GetStandardVertexLayout(Device device, Effect effect)
         {
             var type = typeof(StandardVertex);
@@ -255,12 +225,6 @@ namespace AlphaMapper.Renderer.Managers
             return BuildLayout(effect, device, Resources.StandardSmoothTechnique, elements);
         }
 
-        /// <summary>
-        /// Gets the prelit vertex layout.
-        /// </summary>
-        /// <param name="device">The device.</param>
-        /// <param name="effect">The effect.</param>
-        /// <returns></returns>
         private static InputLayout GetPrelitVertexLayout(Device device, Effect effect)
         {
             var type = typeof(PrelitVertex);
@@ -284,14 +248,6 @@ namespace AlphaMapper.Renderer.Managers
             return BuildLayout(effect, device, Resources.PrelitSmoothTechnique, elements);
         }
 
-        /// <summary>
-        /// Builds the layout.
-        /// </summary>
-        /// <param name="effect">The effect.</param>
-        /// <param name="device">The device.</param>
-        /// <param name="techniqueName">Name of the technique.</param>
-        /// <param name="elements">The elements.</param>
-        /// <returns></returns>
         private static InputLayout BuildLayout(Effect effect, Device device, string techniqueName, InputElement[] elements)
         {
             EffectTechnique technique = effect.GetTechniqueByName(techniqueName);
@@ -299,10 +255,6 @@ namespace AlphaMapper.Renderer.Managers
             return new InputLayout(device, passDescription.Signature, elements);
         }
 
-        /// <summary>
-        /// Sets up the render target.
-        /// </summary>
-        /// <param name="device">The device.</param>
         private void SetupRenderTarget(Device device)
         {
             //Create a render target.
@@ -315,9 +267,6 @@ namespace AlphaMapper.Renderer.Managers
             SetupShadowMapDepthStencilView(device);
         }
 
-        /// <summary>
-        /// Starts the shadow map render.
-        /// </summary>
         public void StartShadowMapRender()
         {
             Effect.GetVariableByName("g_ShadowMap").AsShaderResource().SetResource(null);
@@ -327,15 +276,12 @@ namespace AlphaMapper.Renderer.Managers
 
             //Setup the view port.
             var viewport = new Viewport(0, 0, 4096, 4096);
-            Context.Rasterizer.SetViewports(viewport);
+            Context.Rasterizer.SetViewport(viewport);
 
             //Clear views.
             Context.ClearDepthStencilView(ShadowMapDepthStencilResource, DepthStencilClearFlags.Depth | DepthStencilClearFlags.Stencil, 1.0f, 0);
         }
 
-        /// <summary>
-        /// Starts the scene render.
-        /// </summary>
         public void StartSceneRender()
         {
             Context.OutputMerger.SetTargets(DepthStencilView, RenderTargetView);
@@ -344,17 +290,13 @@ namespace AlphaMapper.Renderer.Managers
 
             //Setup the view port.
             var viewport = new Viewport(0, 0, _targetControl.ClientSize.Width, _targetControl.ClientSize.Height);
-            Context.Rasterizer.SetViewports(viewport);
+            Context.Rasterizer.SetViewport(viewport);
 
             //Clear views.
             Context.ClearRenderTargetView(RenderTargetView, new Color4(0, 0, 0, 1));
             Context.ClearDepthStencilView(DepthStencilView, DepthStencilClearFlags.Depth | DepthStencilClearFlags.Stencil, 1.0f, 0);
         }
 
-        /// <summary>
-        /// Setups the render target view.
-        /// </summary>
-        /// <param name="device">The device.</param>
         private void SetupRenderTargetView(Device device)
         {
             using (var resource = Resource.FromSwapChain<Texture2D>(SwapChain, 0))
@@ -363,10 +305,6 @@ namespace AlphaMapper.Renderer.Managers
             }
         }
 
-        /// <summary>
-        /// Setups the depth stencil view.
-        /// </summary>
-        /// <param name="device">The device.</param>
         private void SetupDepthStencilView(Device device)
         {
             if(DepthStencilView != null)
@@ -395,10 +333,6 @@ namespace AlphaMapper.Renderer.Managers
             }
         }
 
-        /// <summary>
-        /// Setups the shadow map depth stencil view.
-        /// </summary>
-        /// <param name="device">The device.</param>
         private void SetupShadowMapDepthStencilView(Device device)
         {
             const int bounds = 4096;
@@ -418,15 +352,15 @@ namespace AlphaMapper.Renderer.Managers
             };
 
             var shaderResourceViewDescription = new ShaderResourceViewDescription
+            {
+                Format = Format.R32_Float,
+                Dimension = ShaderResourceViewDimension.Texture2D,
+                Texture2D =
                 {
-                    Format = Format.R32_Float,
-                    Dimension = ShaderResourceViewDimension.Texture2D,
-                    Texture2D =
-                        {
-                            MipLevels = 1, 
-MostDetailedMip = 0
-                        }
-                };
+                    MipLevels = 1,
+                    MostDetailedMip = 0
+                }
+            };
 
             var depthStencilViewDescription = new DepthStencilViewDescription
                 {

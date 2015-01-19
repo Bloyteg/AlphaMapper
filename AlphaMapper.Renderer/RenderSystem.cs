@@ -15,12 +15,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using AlphaMapper.Renderer.Components;
 using AlphaMapper.Renderer.Drawables;
 using AlphaMapper.Renderer.InternalComponents;
 using AlphaMapper.Renderer.Managers;
-using MrByte.RWX.Model;
+using AlphaMapper.Renderer.Utility;
+using Bloyteg.AW.Model.RWX.Data;
 using SharpDX;
 using SharpDX.Direct3D11;
 using SharpDX.DXGI;
@@ -78,7 +80,7 @@ namespace AlphaMapper.Renderer
 
         private static void SetChildDrawingManager(MeshDrawableBase mesh, DrawingManager drawingManager)
         {
-            foreach (MeshDrawableBase child in mesh.Children)
+            foreach (var child in mesh.Children.OfType<MeshDrawableBase>())
             {
                 child.DrawingManager = drawingManager;
                 SetChildDrawingManager(child, drawingManager);
@@ -108,7 +110,7 @@ namespace AlphaMapper.Renderer
             _drawingManager.SetGlobalLight(light.ToInternalLight());
         }
 
-        public void SetPostWorldTransform(MrByte.Math.Matrix4 matrix)
+        public void SetPostWorldTransform(Bloyteg.AW.Math.Matrix4 matrix)
         {
             _drawingManager.SetPostWorldMatrix(Matrix.Transpose(matrix.ToDXMatrix()));
         }

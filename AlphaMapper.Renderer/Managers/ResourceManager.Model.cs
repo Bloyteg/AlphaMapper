@@ -20,11 +20,11 @@ using System.Runtime.InteropServices;
 using AlphaMapper.Renderer.Components;
 using AlphaMapper.Renderer.Drawables;
 using AlphaMapper.Renderer.InternalComponents;
-using MrByte.RWX.Model;
-using MrByte.RWX.Model.Components;
-using MrByte.RWX.Model.Mesh;
-using MrByte.RWX.Model.Primitive;
-using MrByte.Utility;
+using AlphaMapper.Renderer.Utility;
+using Bloyteg.AW.Model.RWX.Data;
+using Bloyteg.AW.Model.RWX.Data.Components;
+using Bloyteg.AW.Model.RWX.Data.Mesh;
+using Bloyteg.AW.Model.RWX.Data.Primitive;
 using SharpDX;
 using SharpDX.Direct3D11;
 using DXBuffer = SharpDX.Direct3D11.Buffer;
@@ -36,12 +36,6 @@ namespace AlphaMapper.Renderer.Managers
         private readonly Stack<Matrix> _matrixStack = new Stack<Matrix>();
         private Matrix _currentMatrix = Matrix.Identity;
 
-        /// <summary>
-        /// Gets the mesh cache from model.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <param name="model">The model.</param>
-        /// <returns></returns>
         private MeshCache GetMeshCacheFromModel(string name, Model model)
         {
             //Construct the cache of the model's prototypes.
@@ -62,13 +56,6 @@ namespace AlphaMapper.Renderer.Managers
             return GetMeshCacheFromMeshGeometry(model, model.MainClump);
         }
 
-        /// <summary>
-        /// Builds the mesh from mesh cache.
-        /// </summary>
-        /// <typeparam name="TMesh">The type of the mesh.</typeparam>
-        /// <param name="name">The name.</param>
-        /// <param name="cachedMesh">The cached mesh.</param>
-        /// <returns></returns>
         private TMesh BuildMeshFromMeshCache<TMesh>(string name, MeshCache cachedMesh)
             where TMesh : MeshDrawableBase, new()
         {
@@ -103,13 +90,6 @@ namespace AlphaMapper.Renderer.Managers
             return mesh;
         }
 
-        /// <summary>
-        /// Builds the prototype from mesh cache reference.
-        /// </summary>
-        /// <typeparam name="TMesh">The type of the mesh.</typeparam>
-        /// <param name="name">The name.</param>
-        /// <param name="meshCacheReference">The mesh cache reference.</param>
-        /// <returns></returns>
         private TMesh BuildPrototypeFromMeshCacheReference<TMesh>(string name, MeshCacheReference meshCacheReference)
             where TMesh : MeshDrawableBase, new()
         {
@@ -145,12 +125,6 @@ namespace AlphaMapper.Renderer.Managers
             return prototypeMesh;
         }
 
-        /// <summary>
-        /// Gets the mesh cache from geometry.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <param name="geometry">The geometry.</param>
-        /// <returns></returns>
         private MeshCache GetMeshCacheFromMeshGeometry(Model model, MeshGeometry geometry)
         {
             //Load vertex buffer.
@@ -207,12 +181,6 @@ namespace AlphaMapper.Renderer.Managers
             return meshCache;
         }
 
-        /// <summary>
-        /// Gets the mesh cache from primitive.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <param name="geometry">The geometry.</param>
-        /// <returns></returns>
         private MeshCache GetMeshCacheFromPrimitiveGeometry(Model model, PrimitiveGeometry geometry)
         {
             //Load vertex buffer.
@@ -225,11 +193,6 @@ namespace AlphaMapper.Renderer.Managers
             return new MeshCache(vertexBuffer, tagGroups, geometry.Transform.ToDXMatrix());
         }
 
-        /// <summary>
-        /// Gets the vertex buffer.
-        /// </summary>
-        /// <param name="meshGeometry">The mesh geometry.</param>
-        /// <returns></returns>
         private DXBuffer GetVertexBuffer(IGeometry meshGeometry)
         {
             if (meshGeometry.Vertices.Count == 0)
@@ -269,24 +232,11 @@ namespace AlphaMapper.Renderer.Managers
 
         }
 
-        /// <summary>
-        /// Determines whether the specified mesh geometry is prelit.
-        /// </summary>
-        /// <param name="meshGeometry">The mesh geometry.</param>
-        /// <returns>
-        ///   <c>true</c> if the specified mesh geometry is prelit; otherwise, <c>false</c>.
-        /// </returns>
         private static bool IsPrelit(IGeometry meshGeometry)
         {
             return meshGeometry is MeshGeometry && ((MeshGeometry)meshGeometry).IsPrelit;
         }
 
-        /// <summary>
-        /// Builds the solid geometry tag groups.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <param name="geometry">The geometry.</param>
-        /// <returns></returns>
         private IEnumerable<TagGroup> BuildGeometryTagGroups(Model model, IGeometry geometry)
         {
             return (from face in geometry.Faces
@@ -298,7 +248,7 @@ namespace AlphaMapper.Renderer.Managers
                                    FaceGroups = (from face in tagGroups
                                                  group face by face.MaterialId
                                                  into faceGroup
-                                                 let material = model.GetMaterial(faceGroup.Key)
+                                                 let material = model.Materials[faceGroup.Key]
                                                  let isWireframe = material.GeometrySampling == GeometrySampling.Wireframe
                                                  let texture = isWireframe ? null : GetTexture(material.Texture, false)
                                                  let mask = isWireframe ? null : GetTexture(material.Mask, true)

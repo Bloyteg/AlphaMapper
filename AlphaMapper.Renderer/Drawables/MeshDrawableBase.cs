@@ -16,15 +16,12 @@
 using System;
 using System.Collections.Generic;
 using AlphaMapper.Renderer.InternalComponents;
-using MrByte.Utility;
+using AlphaMapper.Renderer.Utility;
 using SharpDX;
 using DXBuffer = SharpDX.Direct3D11.Buffer;
 
 namespace AlphaMapper.Renderer.Drawables
 {
-    /// <summary>
-    /// Provides a base for those drawable elements that are based on meshes.
-    /// </summary>
     public abstract class MeshDrawableBase : Drawable
     {
         private Matrix _modelMatrix;
@@ -33,9 +30,6 @@ namespace AlphaMapper.Renderer.Drawables
         private readonly List<WeakReference<TagGroup>> _tagGroups = new List<WeakReference<TagGroup>>();
         private readonly Dictionary<Tag, TagGroupMaterialOverload> _materialOverloads = new Dictionary<Tag, TagGroupMaterialOverload>();
 
-        /// <summary>
-        /// Gets the children.
-        /// </summary>
         internal IEnumerable<Drawable> Children
         {
             get { return _children; }
@@ -46,25 +40,10 @@ namespace AlphaMapper.Renderer.Drawables
             get { return _materialOverloads; }
         }
 
-        /// <summary>
-        /// Gets a value indicating whether this instance is prelit.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if this instance is prelit; otherwise, <c>false</c>.
-        /// </value>
         internal bool IsPrelit { get; set; }
 
-        /// <summary>
-        /// Gets or sets the tag.
-        /// </summary>
-        /// <value>
-        /// The tag.
-        /// </value>
         internal int? Tag { get; set; }
 
-        /// <summary>
-        /// Gets the model matrix.
-        /// </summary>
         internal Matrix ModelMatrix
         {
             get { return _modelMatrix; }
@@ -75,21 +54,12 @@ namespace AlphaMapper.Renderer.Drawables
             }
         }
 
-        /// <summary>
-        /// Gets or sets the vertex buffer.
-        /// </summary>
-        /// <value>
-        /// The vertex buffer.
-        /// </value>
         internal DXBuffer VertexBuffer
         {
             get { return _vertexBuffer.GetTarget(); }
             set { _vertexBuffer = new WeakReference<DXBuffer>(value); }
         }
 
-        /// <summary>
-        /// Gets the face groups.
-        /// </summary>
         internal List<WeakReference<TagGroup>> TagGroups
         {
             get
@@ -98,20 +68,11 @@ namespace AlphaMapper.Renderer.Drawables
             }
         }
 
-        /// <summary>
-        /// Adds the child.
-        /// </summary>
-        /// <param name="child">The child.</param>
         internal void AddChild(MeshDrawableBase child)
         {
             _children.Add(child);
         }
 
-        /// <summary>
-        /// Sets the drawing states.
-        /// </summary>
-        /// <param name="faceGroup">The face group.</param>
-        /// <param name="materialOverload">The material overload.</param>
         internal void SetDrawingStates(FaceGroup faceGroup, TagGroupMaterialOverload materialOverload)
         {
             var color = faceGroup.Material.Color;

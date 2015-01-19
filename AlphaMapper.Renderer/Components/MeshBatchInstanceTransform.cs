@@ -15,7 +15,7 @@
 
 using AlphaMapper.Renderer.InternalComponents;
 using SharpDX;
-using Vector3 = MrByte.Math.Vector3;
+using Vector3 = Bloyteg.AW.Math.Vector3;
 
 namespace AlphaMapper.Renderer.Components
 {

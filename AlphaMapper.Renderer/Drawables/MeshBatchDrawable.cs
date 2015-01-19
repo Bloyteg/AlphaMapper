@@ -15,8 +15,8 @@
 
 using System;
 using AlphaMapper.Renderer.InternalComponents;
-using MrByte.RWX.Model.Components;
-using MrByte.Utility;
+using AlphaMapper.Renderer.Utility;
+using Bloyteg.AW.Model.RWX.Data.Components;
 using DXBuffer = SharpDX.Direct3D11.Buffer;
 using Matrix = SharpDX.Matrix;
 
@@ -27,9 +27,6 @@ namespace AlphaMapper.Renderer.Drawables
         internal int InstanceCount { get; set; }
         internal DXBuffer TransformBuffer { get; set; }
 
-        /// <summary>
-        /// Draws this instance.
-        /// </summary>
         public override void Draw()
         {
             if (VertexBuffer != null)
@@ -57,9 +54,6 @@ namespace AlphaMapper.Renderer.Drawables
             }
         }
 
-        /// <summary>
-        /// Draws the shadow.
-        /// </summary>
         public override void DrawShadow()
         {
             if (VertexBuffer != null)
@@ -84,9 +78,6 @@ namespace AlphaMapper.Renderer.Drawables
             }
         }
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
         public override void Dispose()
         {
             if(TransformBuffer != null)

@@ -14,19 +14,14 @@
 // ========================================================================
 
 using AlphaMapper.Renderer.InternalComponents;
-using MrByte.RWX.Model.Components;
-using MrByte.Math;
+using AlphaMapper.Renderer.Utility;
+using Bloyteg.AW.Model.RWX.Data.Components;
+using Bloyteg.AW.Math;
 
 namespace AlphaMapper.Renderer.Components
 {
     public class Light
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Light"/> class.
-        /// </summary>
-        /// <param name="direction">The direction.</param>
-        /// <param name="ambient">The ambient.</param>
-        /// <param name="diffuse">The diffuse.</param>
         public Light(Vector3 direction, Color ambient, Color diffuse)
         {
             Direction = direction;
@@ -34,25 +29,10 @@ namespace AlphaMapper.Renderer.Components
             Diffuse = diffuse;
         }
 
-        /// <summary>
-        /// Gets the direction.
-        /// </summary>
         public Vector3 Direction { get; private set; }
-
-        /// <summary>
-        /// Gets the ambient.
-        /// </summary>
         public Color Ambient { get; private set; }
-
-        /// <summary>
-        /// Gets the diffuse.
-        /// </summary>
         public Color Diffuse { get; private set; }
 
-        /// <summary>
-        /// Converts to the internal light structure.
-        /// </summary>
-        /// <returns></returns>
         internal InternalComponents.Light ToInternalLight()
         {
             return new InternalComponents.Light(Direction.ToDXVector3(), Ambient.ToDXColor4(), Diffuse.ToDXColor4());

@@ -20,7 +20,7 @@ using System.Linq;
 using AlphaMapper.Renderer.Components;
 using AlphaMapper.Renderer.Drawables;
 using AlphaMapper.Renderer.InternalComponents;
-using MrByte.RWX.Model;
+using Bloyteg.AW.Model.RWX.Data;
 using SharpDX.Direct3D11;
 
 namespace AlphaMapper.Renderer.Managers
